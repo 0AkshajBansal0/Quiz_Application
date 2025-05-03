@@ -10,11 +10,6 @@ const quizData = [
         answer: "All",
     },
     {
-        question: "What does CSS stand for?",
-        options: ["Cascading Style Sheets", "Colorful Style System", "Computer Style Sheets", "Creative Style Syntax"],
-        answer: "Cascading Style Sheets",
-    },
-    {
         question: "What does HTML stand for?",
         options: ["Hyper Trainer Marking Language", "Hyper Text Markup Language", "Hyper Text Marketing Language", "Hyper Tool Multi Language"],
         answer: "Hyper Text Markup Language",

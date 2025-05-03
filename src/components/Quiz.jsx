@@ -53,88 +53,57 @@ const Quiz = () => {
   }
 
   return (
-    <div style={{
-      maxWidth: "600px",
-      margin: "2rem auto",
-      padding: "1.5rem",
-      border: "1px solid #ccc",
-      borderRadius: "10px",
-      background: "#ffffff",
-      boxShadow: "0 0 15px rgba(0,0,0,0.1)"
-    }}>
-      <div style={{ marginBottom: "1rem" }}>
-        <div style={{
-          height: "10px",
-          width: "100%",
-          backgroundColor: "#eee",
-          borderRadius: "5px",
-          overflow: "hidden",
-          marginBottom: "0.5rem"
-        }}>
+    <div className="max-w-xl mx-auto my-8 p-6 border border-gray-300 rounded-lg bg-white shadow-md">
+      <div className="mb-4">
+        <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden mb-2">
           <div
-            style={{
-              height: "100%",
-              width: `${progressPercent}%`,
-              backgroundColor: "#4caf50",
-              transition: "width 0.3s ease"
-            }}
+            className="h-full bg-green-500 transition-all duration-300"
+            style={{ width: `${progressPercent}%` }}
           />
         </div>
-        <p style={{ textAlign: "right", margin: 0 }}>{progressPercent}% done</p>
+        <p className="text-right text-sm m-0">{progressPercent}% done</p>
       </div>
 
       <Progress current={currentQ} total={quizData.length} />
 
-      <h3>{quizData[currentQ].question}</h3>
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <h3 className="text-lg font-semibold mt-4 mb-2">{quizData[currentQ].question}</h3>
+      <ul className="list-none p-0">
         {quizData[currentQ].options.map((option, idx) => {
-          let bgColor = "#f4f4f4";
+          let bgColor = "bg-gray-100";
 
           if (isAnswered) {
             const isCorrect = option === quizData[currentQ].answer;
             const isSelectedWrong = option === selected && option !== quizData[currentQ].answer;
 
-            if (isCorrect) bgColor = "#d4edda"; // green
-            if (isSelectedWrong) bgColor = "#f8d7da"; // red
+            if (isCorrect) bgColor = "bg-green-100";
+            if (isSelectedWrong) bgColor = "bg-red-100";
           } else if (selected === option) {
-            bgColor = "#cce5ff"; // light blue
+            bgColor = "bg-blue-100";
           }
 
           return (
             <li
               key={idx}
               onClick={() => handleOptionClick(option)}
-              style={{
-                padding: "0.75rem",
-                margin: "0.5rem 0",
-                backgroundColor: bgColor,
-                borderRadius: "6px",
-                cursor: isAnswered ? "default" : "pointer",
-                border: "1px solid #ccc",
-                transition: "background-color 0.2s"
-              }}
-            >
+              className={`p-3 my-2 rounded-md border border-gray-300 cursor-pointer transition-colors duration-200 ${bgColor} ${
+                isAnswered ? "cursor-default" : "hover:bg-blue-200"
+              }`}>
               {option}
             </li>
           );
         })}
       </ul>
 
-      {feedback && <p style={{ marginTop: "1rem", fontWeight: "bold" }}>{feedback}</p>}
+      {feedback && (
+        <p className="mt-4 font-semibold">{feedback}</p>
+      )}
 
       <button
         onClick={handleNext}
         disabled={!isAnswered}
-        style={{
-          marginTop: "1rem",
-          padding: "0.6rem 1.2rem",
-          backgroundColor: isAnswered ? "#007bff" : "#aaa",
-          color: "#fff",
-          border: "none",
-          borderRadius: "5px",
-          cursor: isAnswered ? "pointer" : "not-allowed"
-        }}
-      >
+        className={`mt-4 px-5 py-2 rounded-md text-white ${
+          isAnswered ? "bg-blue-600 hover:bg-blue-700 cursor-pointer" : "bg-gray-400 cursor-not-allowed"
+        }`}>
         Next
       </button>
     </div>
